@@ -1,0 +1,19 @@
+{
+    "name": "anydoor",
+    "version": "0.0.1",
+    "script": {
+        "dev": "parcel index",
+        "lint": "eslint .",
+        "fix": "eslint --fix"
+    },
+    "dependencies": {  
+    },
+    "devDependencies": {
+        "pre-commit": "^1.2.2",
+        "eslint": "^4.16.0"
+    },
+    "pre-commit": [
+        "fix",
+        "lint"
+    ]
+}
