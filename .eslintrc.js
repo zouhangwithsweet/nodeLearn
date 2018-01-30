@@ -185,5 +185,6 @@ module.exports = {
         "wrap-regex": 2,
         // 要求箭头函数的参数使用圆括号  "as-needed" 当只有一个参数时允许省略圆括号。
         "arrow-parens": [2, "as-needed"],
+        "eol-last": 2
     }
 }
