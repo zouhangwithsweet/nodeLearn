@@ -1,6 +1,16 @@
 // https://eslint.org/docs/user-guide/configuring
 
 module.exports = {
+    parser: 'babel-eslint',
+    "env": {
+        "es6": true,
+        "browser": true,
+        "node": true
+    },
+    parserOptions: {
+        sourceType: 'module',
+        "ecmaVersion": 6 
+    },
     extends: [
       'eslint:recommended'
     ],
