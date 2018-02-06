@@ -2,6 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const Hanlebars = require('handlebars')
 const conf = require('../config')
+const mime = require('./mime')
 
 const tplPath = path.join(__dirname, '../template/dir.tpl')
 const source = fs.readFileSync(tplPath)
@@ -27,8 +28,9 @@ async function readF(req, res, filePath) {
     try {
         const rep = await _r(filePath)
         if (rep.isFile()) {
+            const contentType = mime(filePath)
             res.statusCode = 200
-            res.setHeader('Content-Type', 'text/plain')
+            res.setHeader('Content-Type', contentType)
             fs.createReadStream(filePath).pipe(res)
         } else if (rep.isDirectory()) {
             let rep = await _dir(filePath)
