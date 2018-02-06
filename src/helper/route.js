@@ -34,9 +34,10 @@ async function readF(req, res, filePath) {
             let rep = await _dir(filePath)
             res.statusCode = 200
             res.setHeader('Content-Type', 'text/html')
+            const dir = path.relative(conf.root, filePath)
             const data = {
                 title: path.basename(filePath),
-                dir: path.relative(conf.root, filePath),
+                dir: dir ? `${dir}` : '',
                 files: rep
             }
             res.end(template(data))
