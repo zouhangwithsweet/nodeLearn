@@ -13,7 +13,7 @@ const mimeTypes = {
     'svg': 'image/svg+xml',
     'swf': 'application/x-shockwave-flash',
     'tiff': 'image/tiff',
-    'txt': 'text/plain;charset="UTF-8"',
+    'txt': 'text/plain;charset=UTF-8',
     'wav': 'audio/x-wav',
     'wma': 'audio/x-ms-wma',
     'wmv': 'video/x-ms-wmv',
