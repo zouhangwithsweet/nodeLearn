@@ -3,6 +3,7 @@ const path = require('path')
 const Hanlebars = require('handlebars')
 const conf = require('../config')
 const mime = require('./mime')
+const compress = require('./compress')
 
 const tplPath = path.join(__dirname, '../template/dir.tpl')
 const source = fs.readFileSync(tplPath)
@@ -31,7 +32,12 @@ async function readF(req, res, filePath) {
             const contentType = mime(filePath)
             res.statusCode = 200
             res.setHeader('Content-Type', contentType)
-            fs.createReadStream(filePath).pipe(res)
+            let rs = fs.createReadStream(filePath)
+            if (filePath.match(conf.compress)) {
+                rs = compress(rs, req, res)
+            }
+            console.log(res.getHeaders())
+            rs.pipe(res)
         } else if (rep.isDirectory()) {
             let rep = await _dir(filePath)
             res.statusCode = 200
@@ -39,7 +45,7 @@ async function readF(req, res, filePath) {
             const dir = path.relative(conf.root, filePath)
             const data = {
                 title: path.basename(filePath),
-                dir: dir ? `${dir}` : '',
+                dir: dir ? `/${dir}` : '',
                 files: rep
             }
             res.end(template(data))
