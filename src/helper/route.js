@@ -36,7 +36,6 @@ async function readF(req, res, filePath) {
             if (filePath.match(conf.compress)) {
                 rs = compress(rs, req, res)
             }
-            console.log(res.getHeaders())
             rs.pipe(res)
         } else if (rep.isDirectory()) {
             let rep = await _dir(filePath)

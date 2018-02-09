@@ -7,7 +7,7 @@ const mimeTypes = {
     'ico': 'image/jpeg',
     'jpeg': 'image/jpeg',
     'jpg': 'image/jpeg',
-    'js': 'text/javascript',
+    'js': 'application/javascript;charset=UTF-8',
     'pdf': 'application/pdf',
     'png': 'image/png',
     'svg': 'image/svg+xml',
