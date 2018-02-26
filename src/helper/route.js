@@ -1,7 +1,6 @@
 const fs = require('fs')
 const path = require('path')
 const Hanlebars = require('handlebars')
-const conf = require('../config')
 const mime = require('./mime')
 const compress = require('./compress')
 const range = require('./range')
@@ -27,7 +26,7 @@ const _dir = path => {
         })
     })
 }
-async function readF(req, res, filePath) {
+async function readF(req, res, filePath, conf) {
     try {
         const rep = await _r(filePath)
         if (rep.isFile()) {

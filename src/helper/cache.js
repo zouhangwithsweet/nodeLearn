@@ -10,10 +10,10 @@ function refreshRes(stats, res) {
     if (lastModified) {
         res.setHeader('Last-Modified', stats.mtime.toUTCString())
     }
-    if (etag) {
-        const _et = new Date(stats.mtime).getTime()
-        res.setHeader('ETag', `${stats.size}-${_et}`)
-    }
+    // if (etag) {
+    //     const _et = new Date(stats.mtime).getTime()
+    //     res.setHeader('ETag', `${stats.size}-${_et}`)
+    // }
 }
 module.exports = (stats, req, res) => {
     refreshRes(stats, res)
