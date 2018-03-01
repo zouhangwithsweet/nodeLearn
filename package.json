@@ -8,7 +8,8 @@
     "scripts": {
         "dev": "parcel index",
         "lint": "eslint .",
-        "fix": "eslint --fix"
+        "fix": "eslint --fix",
+        "webpack": "webpack"
     },
     "dependencies": {
         "yargs": "^11.0.0"
@@ -18,6 +19,8 @@
         "babel-preset-env": "^1.6.1",
         "eslint": "^4.16.0",
         "handlebars": "^4.0.11",
-        "pre-commit": "^1.2.2"
+        "pre-commit": "^1.2.2",
+        "webpack": "^4.0.1",
+        "webpack-cli": "^2.0.9"
     }
 }
