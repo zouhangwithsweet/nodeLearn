@@ -1,0 +1,27 @@
+{
+  "name": "nodelearn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "learn"
+  ],
+  "author": "zh",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "eventproxy": "^1.0.0",
+    "express": "^4.16.2",
+    "koa": "^2.4.1",
+    "mongodb": "^3.0.1",
+    "mongoose": "^5.0.1",
+    "superagent": "^3.8.2"
+  },
+  "devDependencies": {
+    "koa-bodyparser": "^4.2.0",
+    "koa-router": "^7.4.0"
+  }
+}
