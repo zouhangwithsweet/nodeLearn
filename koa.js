@@ -1,43 +1,37 @@
 const Koa = require('koa')
 const router = require('koa-router')()
 const bodyParser = require('koa-bodyparser')
-
+const fs = require('fs')
 const app = new Koa()
 
-app.use(async (ctx, next) => {
-    console.log(`Process ${ctx.request.method} ${ctx.request.url}...`)
-    await next()
+const files = fs.readdirSync(__dirname + '/controllers')
+const js_files = files.filter(f => {
+    return f.endsWith('.js')
 })
 
-// add url-route
-router.get('/hello/:name', async(ctx, next) => {
-    const name = ctx.params.name
-    ctx.response.body = `<h1>hello, ${name}</h1>`
-})
-
-router.get('/', async (ctx, next) => {
-    ctx.response.body=`<h1>Index page</h1>
-        <form action="/signin" method="post">
-            <p>Name: <input type="text" name="name" value="koa"/></p>
-            <p>Password: <input type="password" name="password"/></p>
-            <p><input type="submit" value="Submit"/></p>
-        </form>
-    `
-})
-
-router.post('/signin', async (ctx, next) => {
-    const name = ctx.request.body.name || ''
-    const password = ctx.request.body.password || ''
-    console.log(`Signin with name: ${name}, password: ${password}`)
-
-    if (name === 'koa' && password ==='12345') {
-        ctx.response.body = `<h1>welcome, ${name}</h1>`
-    } else {
-        ctx.response.body = `<h1>Login failed!</h1>
-            <p><a href="/">Try again</a></p>
-        `
+for (let f of js_files) {
+    console.log(`Process controller: ${f}...`)
+    // 导入js文件:
+    let mapping = require(__dirname + '/controllers/' + f);
+    for (var url in mapping) {
+        if (url.startsWith('GET ')) {
+            // 如果url类似"GET xxx":
+            var path = url.substring(4);
+            router.get(path, mapping[url]);
+            console.log(`register URL mapping: GET ${path}`);
+        } else if (url.startsWith('POST ')) {
+            // 如果url类似"POST xxx":
+            var path = url.substring(5);
+            router.post(path, mapping[url]);
+            console.log(`register URL mapping: POST ${path}`);
+        } else {
+            // 无效的URL:
+            console.log(`invalid URL: ${url}`);
+        }
     }
-})
+}
+
+
 
 app.use(bodyParser())
 
