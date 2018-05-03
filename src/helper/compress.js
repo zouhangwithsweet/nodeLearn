@@ -3,7 +3,6 @@ const { createGzip, createDeflate } = require('zlib')
 module.exports = (rs, req, res) => {
     const acceptEncoding = req.headers['accept-encoding'];
     if (!acceptEncoding || !acceptEncoding.match(/\b(gzip|deflate)\b/)) {
-        console.log('未压缩')
         return rs
     } else if (acceptEncoding.match(/\bgzip\b/)) {
         res.setHeader('Content-Encoding', 'gzip')
