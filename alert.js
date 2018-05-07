@@ -1,1 +1,1 @@
-alert('加载成功')
+console.log(__dirname)
