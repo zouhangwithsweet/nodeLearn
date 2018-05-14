@@ -1,9 +1,9 @@
-// const Koa = require('koa')
-// const router = require('koa-router')()
-// const bodyParser = require('koa-bodyparser')
-// const fs = require('fs')
-// const controller = require('./controller')
-// const app = new Koa()
+const Koa = require('koa')
+const router = require('koa-router')()
+const bodyParser = require('koa-bodyparser')
+const fs = require('fs')
+const controller = require('./controller')
+const app = new Koa()
 
 const nunjucks = require('nunjucks');
 
@@ -44,10 +44,14 @@ console.log(env.render('extend.html', {
     body: 'bla bla bla...'
 }));
 
-// app.use(bodyParser())
+app.use(bodyParser())
 
-// // add router middleware
-// app.use(controller())
+let staticFiles = require('./static-files')
 
-// app.listen(9527)
-// console.log('server start up')
+app.use(staticFiles('/static/', __dirname + '/static'))
+
+// add router middleware
+app.use(controller())
+
+app.listen(9527)
+console.log('server start up')
