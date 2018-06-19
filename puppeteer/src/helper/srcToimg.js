@@ -3,12 +3,13 @@ const https = require('https')
 const fs = require('fs')
 const path = require('path')
 const { promisify } = require('util')
-const wirteFile = promisify(fs.writeFile)
+const writeFile = promisify(fs.writeFile)
 
 module.exports = async (src, dir) => {
     if (/\.(jpg|png|gif)$/.test(src)) {
         await urlToImg(src, dir);
     } else {
+        // console.log(writeFile)
         await base64ToImg(src, dir)
     }
 }

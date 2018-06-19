@@ -25,6 +25,7 @@ const srcToimg = require('./helper/srcToimg')
         })
 
         srcs.forEach(async src => {
+            await page.waitFor(200)
             await srcToimg(src, images.screenshot)
         })
 
